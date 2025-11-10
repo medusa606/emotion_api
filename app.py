@@ -2,7 +2,6 @@
 from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import Dict
-import math
 
 app = FastAPI(title="Emotion Analysis API")
 
@@ -37,3 +36,8 @@ def analyze_emotions(text: str) -> Dict[str, float]:
 def analyze_text(input: TextInput):
     emotions = analyze_emotions(input.text)
     return {"emotions": emotions}
+
+# ---- Start server when running directly (needed for Render) ----
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run("app:app", host="0.0.0.0", port=10000)
